@@ -27,9 +27,9 @@ git clone <repository-url>
 cd weather-api
 ```
 
-2. Create a `.env` file based on `.env.example`:
+2. Create a `.env` file based on `.env.dist`:
 ```bash
-cp .env.example .env
+cp .env.dist .env
 ```
 
 3. Update the `.env` file with your configuration:
@@ -48,7 +48,7 @@ DB_PASSWORD=postgres
 
 # Weather API
 WEATHER_API_KEY=your_api_key_here
-WEATHER_API_URL=https://api.weatherapi.com/v1
+WEATHER_API_URL=https://api.weatherapi.com/v1/
 WEATHER_API_TIMEOUT=5000
 
 # Email
