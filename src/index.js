@@ -4,7 +4,7 @@ import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
 import models, { sequelize } from './models/index.js';
 import weatherRoutes from './routes/weather.js';
-import subscriptionRoutes from './routes/subscriptions.js';
+import { subscribeRouter, confirmRouter, unsubscribeRouter } from './routes/subscriptions.js';
 import logger from './utils/logger.js';
 import { CronJob } from 'cron';
 import { getWeather } from './utils/weather.js';
@@ -34,11 +34,11 @@ app.use(errorHandler);
 const swaggerDocs = swaggerJsdoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-// Mount routes directly on /api
+// Register routes
 app.use('/api/weather', weatherRoutes);
-app.use('/api/subscribe', subscriptionRoutes);
-app.use('/api/confirm', subscriptionRoutes);
-app.use('/api/unsubscribe', subscriptionRoutes);
+app.use('/api/subscribe', subscribeRouter);
+app.use('/api/confirm', confirmRouter);
+app.use('/api/unsubscribe', unsubscribeRouter);
 
 // Global error handler
 app.use((err, req, res, next) => {

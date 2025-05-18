@@ -5,6 +5,8 @@ import logger from '../utils/logger.js';
 import crypto from 'crypto';
 
 const router = express.Router();
+const confirmRouter = express.Router();
+const unsubscribeRouter = express.Router();
 
 /**
  * @swagger
@@ -112,7 +114,7 @@ router.post('/', async (req, res) => {
  *       404:
  *         description: Token not found
  */
-router.get('/:token', async (req, res) => {
+confirmRouter.get('/:token', async (req, res) => {
   try {
     const { token } = req.params;
     const subscription = await models.Subscription.findOne({ where: { token } });
@@ -158,7 +160,7 @@ router.get('/:token', async (req, res) => {
  *       404:
  *         description: Token not found
  */
-router.get('/:token', async (req, res) => {
+unsubscribeRouter.get('/:token', async (req, res) => {
   try {
     const { token } = req.params;
     const subscription = await models.Subscription.findOne({ where: { token } });
@@ -175,4 +177,4 @@ router.get('/:token', async (req, res) => {
   }
 });
 
-export default router; 
+export { router as subscribeRouter, confirmRouter, unsubscribeRouter }; 
